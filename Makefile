@@ -7,7 +7,7 @@
 
 .PHONY: ci
 ci: .dapper
-	./.dapper $@
+	./.dapper ci 2>&1 | tee release.log
 
 .DEFAULT_GOAL := ci
 

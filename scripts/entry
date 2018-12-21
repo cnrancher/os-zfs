@@ -2,7 +2,7 @@
 set -e
 
 if [ -z "$OS_KERNEL" ] || [ -z "$ZFS" ]; then
-    echo -e "\e[91mExit: OS_KERNEL and ZFS must be set"
+    echo -e "\e[91mExit: OS_KERNEL and ZFS must be set\e[0m"
     exit 0
 fi
 
