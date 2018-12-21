@@ -1,0 +1,12 @@
+#!/bin/bash
+set -ex
+
+cd $(dirname $0)/..
+
+KERNEL_HEADERS="https://github.com/rancher/os-kernel/releases/download/v${OS_KERNEL}/build-linux-${OS_KERNEL}-x86.tar.gz"
+KERNEL_BASE="https://github.com/rancher/os-kernel/releases/download/v${OS_KERNEL}/linux-${OS_KERNEL}-x86.tar.gz"
+
+curl -sfL ${KERNEL_BASE} | tar xf - -C /
+curl -sfL ${KERNEL_HEASERS} |tar xf - -C /usr/src/v${OS_KERNEL}
+
+

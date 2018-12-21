@@ -1,0 +1,11 @@
+#!/bin/bash
+set -ex
+
+cd $(dirname $0)/..
+
+echo prepare
+./scripts/prepare
+echo build
+./scripts/build
+echo package
+./scripts/package

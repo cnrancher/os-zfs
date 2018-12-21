@@ -1,0 +1,14 @@
+FROM ubuntu:bionic
+
+RUN apt-get update \
+    && apt-get -y --no-install-recommends install \
+    vim
+
+ENV DAPPER_SOURCE /source
+ENV DAPPER_OUTPUT ./dist
+ENV DAPPER_ENV OS_KERNEL ZFS
+
+WORKDIR ${DAPPER_SOURCE}
+
+ENTRYPOINT ["./scripts/entry"]
+CMD ["ci"]

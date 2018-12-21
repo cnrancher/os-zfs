@@ -1,0 +1,7 @@
+#!/bin/bash
+set -ex
+
+cd $(dirname $0)/..
+
+# fine kernel modules
+find spl zfs -name \*.ko

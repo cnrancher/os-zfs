@@ -1,0 +1,16 @@
+#!/bin/bash
+set -e
+
+if [ -z "$OS_KERNEL" ] || [ -z "$ZFS" ]; then
+    echo -e "\e[91mExit: OS_KERNEL and ZFS must be set"
+    exit 0
+fi
+
+mkdir -p dist
+if [ -e ./scripts/$1 ]; then
+    ./scripts/"$@"
+else
+    exec "$@"
+fi
+
+chown -R $DAPPER_UID:$DAPPER_GID .
