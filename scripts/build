@@ -3,11 +3,9 @@ set -ex
 
 cd $(dirname $0)/..
 
-curl -sL https://github.com/zfsonlinux/zfs/releases/download/zfs-${ZFS}/spl-${ZFS}.tar.gz > spl-${ZFS}.tar.gz
-curl -sL https://github.com/zfsonlinux/zfs/releases/download/zfs-${ZFS}/zfs-${ZFS}.tar.gz > zfs-${ZFS}.tar.gz
 mkdir -p /usr/src/spl /usr/src/zfs
-tar zxvf spl-${ZFS}.tar.gz --strip-components=1 -C /usr/src/spl
-tar zxvf zfs-${ZFS}.tar.gz --strip-components=1 -C /usr/src/zfs
+curl -sfL https://github.com/zfsonlinux/zfs/releases/download/zfs-${ZFS}/spl-${ZFS}.tar.gz | tar zxf - --strip-components=1 -C /usr/src/spl
+curl -sfL https://github.com/zfsonlinux/zfs/releases/download/zfs-${ZFS}/zfs-${ZFS}.tar.gz | tar zxf - --strip-components=1 -C /usr/src/zfs
 
 KERNEL_BUILD_DIR=/lib/modules/${OS_KERNEL}/build
 
@@ -15,10 +13,12 @@ pushd /usr/src/spl
 sh ./autogen.sh
 ./configure --with-linux=${KERNEL_BUILD_DIR}
 make -s -j$(nproc)
+make DESTDIR=${DAPPER_SOURCE}/dist/arch install
 popd
 
 pushd /usr/src/zfs
 sh ./autogen.sh
 ./configure --with-linux=${KERNEL_BUILD_DIR}
 make -s -j$(nproc)
+make DESTDIR=${DAPPER_SOURCE}/dist/arch install
 popd

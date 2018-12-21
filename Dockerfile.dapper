@@ -2,7 +2,10 @@ FROM ubuntu:bionic
 
 RUN apt-get update \
     && apt-get -y --no-install-recommends install \
-    vim
+    build-essential \
+    automake ca-certificates openssl \
+    zlib1g-dev uuid-dev libattr1-dev libblkid-dev libselinux-dev libudev-dev libssl-dev libelf-dev \
+    vim curl file
 
 ENV DAPPER_SOURCE /source
 ENV DAPPER_OUTPUT ./dist
