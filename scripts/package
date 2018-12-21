@@ -3,5 +3,8 @@ set -ex
 
 cd $(dirname $0)/..
 
-# fine kernel modules
-find spl zfs -name \*.ko
+pushd ./dist
+FILE="os-zfs-${OS_KERNEL}-${ZFS}.tar.gz"
+rm -f ${FILE}
+tar czf ${FILE} -C ./arch/ .
+popd
