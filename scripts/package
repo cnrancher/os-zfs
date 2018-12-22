@@ -3,6 +3,17 @@ set -ex
 
 cd $(dirname $0)/..
 
+pushd ./dist/arch
+mv sbin usr/
+mv lib/* usr/lib/ && rm -rf lib
+mv usr/local/bin usr/
+mv usr/local/sbin/* usr/sbin/
+mv usr/local/libexec usr/
+mv usr/local/lib/* usr/lib/
+mv usr/local/share usr/
+rm -rf usr/local
+popd
+
 pushd ./dist
 FILE="os-zfs-${OS_KERNEL}-${ZFS}.tar.gz"
 rm -f ${FILE}
